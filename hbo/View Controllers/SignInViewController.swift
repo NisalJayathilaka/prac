@@ -38,6 +38,7 @@ class SignInViewController: UIViewController {
 
     @IBAction func singInTapped(_ sender: Any) {
         
+        
        // let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         
         let email = emailAddressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -52,10 +53,24 @@ class SignInViewController: UIViewController {
             }
             else
             {
+                
+                let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+                
+                let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.style = UIActivityIndicatorView.Style.gray
+                loadingIndicator.startAnimating();
+                
+                alert.view.addSubview(loadingIndicator)
+                self.present(alert, animated: true, completion: nil)
+                
+                
                 let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constans.Storyboard.homeviewController) as? HomeViewController
 
                 self.view.window?.rootViewController = homeViewController
                 self.view.window?.makeKeyAndVisible()
+                
+                alert.dismiss(animated: false, completion: nil)
             }
         }
         

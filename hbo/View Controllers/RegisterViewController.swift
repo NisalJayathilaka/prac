@@ -25,6 +25,7 @@ class RegisterViewController: UIViewController {
 //    @IBOutlet weak var errorLable: UILabel!
     
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var profileimage: UIImageView!
     
     
     
@@ -62,7 +63,7 @@ class RegisterViewController: UIViewController {
         let cleanedPassword = passwordTextFeild.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Utilities.isPasswordValid(cleanedPassword) == false
         {
-            return " please make sure your password is at least 8 hcarackers, contains a special character and a number"
+            return "  password least 8 carackters, special character and a number"
         }
         
         return nil
@@ -95,7 +96,8 @@ class RegisterViewController: UIViewController {
                 }
                 else{
                    let db = Firestore.firestore()
-                    db.collection("user").addDocument(data: ["fistname" : firstName, "lastname" : lastName, "email" : email, " zipcode" : zipcode,"uid" : result!.user.uid]) { (error) in
+                    db.collection("user").addDocument(data:
+                    ["fistname" : firstName, "lastname" : lastName, "email" : email, " zipcode" : zipcode,"uid" : result!.user.uid]) { (error) in
                         
                         if error != nil {
                         self.showError("error saving user data")
